@@ -1,0 +1,56 @@
+{
+  "sourceRoot": "server",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "server/dist",
+
+        "main": "server/src/main.ts",
+        "tsConfig": "server/tsconfig.app.json",
+        "assets": [
+          { "input": "server/src/assets", "output": "assets", "glob": "**/*" }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "externalDependencies": "none",
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "server/src/environments/environment.ts",
+              "with": "server/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "server:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["server/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/server"],
+      "options": {
+        "jestConfig": "server/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

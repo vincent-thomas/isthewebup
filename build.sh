@@ -1,0 +1,1 @@
+npm run build:server:watch & cd server/dist && npx nodemon main.js 

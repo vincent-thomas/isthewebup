@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "projects": {
+    "e2e-web": "e2e/web",
+    "server": "server",
+    "web": "web"
+  }
+}

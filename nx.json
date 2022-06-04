@@ -6,19 +6,20 @@
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/react"
+  },
+  "workspaceLayout": {
+    "appsDir": "./",
+    "libsDir": "./"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "YjY3MjYzNGItZmJiYy00OWRhLWJkZDAtM2I2ZWY1YjMzMDczfHJlYWQtd3JpdGU="
       }
     }
-  }
+  },
+  "defaultProject": "server"
 }
