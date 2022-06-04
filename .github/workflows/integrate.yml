@@ -9,7 +9,7 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    name: Install Deps
+    name: Integrate
     strategy:
       fail-fast: true
       matrix:

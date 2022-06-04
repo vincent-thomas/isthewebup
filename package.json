@@ -5,7 +5,7 @@
   "scripts": {
     "build-all": "nx run-many --target=build --all",
     "build:server:watch": "nx build server --watch",
-    "build:server": ""
+    "build:server": "sh ./scripts/server/build.sh"
   },
   "private": true,
   "devDependencies": {
