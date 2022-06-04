@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { createWebsite, getWebsite } from '../repositories/website';
 
@@ -8,7 +7,7 @@ interface Services {
 }
 
 export type TController = (
-  req: Request & { prisma: PrismaClient; db: Services },
+  req: Request & { db: Services },
   res: Response,
   next?: () => void
 ) => void;
