@@ -11,4 +11,4 @@ export type TController = (
   req: Request & { prisma: PrismaClient; db: Services },
   res: Response,
   next?: () => void
-) => any;
+) => void;

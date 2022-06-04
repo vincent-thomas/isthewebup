@@ -1,9 +1,8 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express } from 'express';
 
 export class Server {
   #port: number;
 
-  #server;
   #app: Express;
 
   constructor() {
