@@ -1,5 +1,0 @@
-packages:
-  - 'web'
-  - 'e2e/web'
-
-  - 'server'

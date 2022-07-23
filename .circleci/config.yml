@@ -1,0 +1,61 @@
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/repo
+
+orbs:
+  codecov: codecov/codecov@3.2.3
+
+executors:
+  node_medium:
+    <<: *defaults
+    docker:
+      - image: cimg/node:16.13.1
+    resource_class: medium
+
+commands:
+  install-pnpm:
+    steps:
+      - run:
+          name: Install PNPM
+          command: npm install --prefix=$HOME/.local -g pnpm@7.4.0
+      - run:
+          name: Set pnpm store path
+          command: pnpm config set store-dir ~/.pnpm-store
+
+  install-deps:
+    steps:
+      - restore_cache:
+          key: pnpm-cache-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Install Dependencies
+          command: pnpm install
+      - save_cache:
+          key: pnpm-cache-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - ~/.pnpm-store
+  run_build:
+    steps:
+      - run:
+          name: Run Builds
+          command: npm run build --no-lint
+
+jobs:
+  build_job:
+    environment:
+      HOST: "http://localhost:3000"
+    executor: node_medium
+    steps:
+      - checkout
+      - install-pnpm
+      - install-deps
+      - run_build
+
+workflows:
+  version: 2
+  CI:
+    jobs:
+      - build_job:
+          filters:
+            branches:
+              ignore: main
